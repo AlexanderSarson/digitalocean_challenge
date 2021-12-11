@@ -1,0 +1,4 @@
+name: digitalocean_challenge
+runtime:
+  name: python
+description: Kubernetes challenge
