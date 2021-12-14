@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: anchore
+    chart: anchore-engine
     repoURL: https://charts.anchore.io
     targetRevision: 1.*
   syncPolicy:
