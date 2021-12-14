@@ -3,3 +3,4 @@ venv/
 infrastructure/Pulumi.dev.yaml
 infrastructure/notes.txt
 infrastructure/config
+stuff/
