@@ -30,5 +30,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN curl -fsSL https://get.pulumi.com | sh && echo 'export PATH="$PATH:~/.pulumi/bin"' >> ~/.bashrc 
 # Install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.22.0/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl && echo 'alias k=kubectl' >>~/.bashrc
+# Install helm
+RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1

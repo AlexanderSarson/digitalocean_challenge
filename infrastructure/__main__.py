@@ -1,8 +1,7 @@
 """A DigitalOcean Python Pulumi program"""
-import base64
 import pulumi
 import pulumi_digitalocean as do
-from pulumi_kubernetes.helm.v3 import Chart, ChartOpts
+from pulumi_kubernetes.helm.v3 import Chart, ChartOpts, LocalChartOpts
 import pulumi_kubernetes as k8s
 from pulumi import ResourceOptions
 
@@ -27,5 +26,13 @@ argocd = Chart('argocd-chart',
         namespace=argocd_namespace.metadata["name"],
         fetch_opts={'repo': 'https://argoproj.github.io/argo-helm'}),
     opts=ResourceOptions(provider=k8s_provider))
+
+argocd_setup = Chart(
+    "argocd_setup",
+    LocalChartOpts(
+        path="../argocd/setup",
+        namespace=argocd_namespace.metadata["name"],
+    ),opts=ResourceOptions(provider=k8s_provider)
+)
 
 pulumi.export("kubeconfig",kube_config)
