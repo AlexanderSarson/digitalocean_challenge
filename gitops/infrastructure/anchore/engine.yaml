@@ -16,6 +16,8 @@ spec:
     targetRevision: 1.*
     helm:
       values: |
+        anchoreGlobal:
+          defaultAdminPassword: anchore123
         anchoreAnalyzer:
           malware:
             clamav:
