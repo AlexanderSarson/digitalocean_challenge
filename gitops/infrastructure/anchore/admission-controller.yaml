@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: anchore-admission-controller
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: anchore
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: anchore-admission-controller
+    repoURL: https://charts.anchore.io
+    targetRevision: 0.*
+    helm:
+      values: |
+        credentials:
+          users:
+          - username: admin
+            password: anchore123
+        anchoreEndpoint: "https://anchore-engine-anchore-engine-api.anchore.svc.cluster.local:8228"
+        policySelectors:
+          - Selector:
+              ResourceType: "image"
+              SelectorKeyRegex: ".*"
+              SelectorValueRegex: ".*"
+            PolicyReference:
+              Username: "admin"
+              # This is the default bundle id in anchore engine
+              PolicyBundleId: "2c53a13c-1765-11e8-82ef-23527761d060"
+            # Mode is one of: "policy", "analysis", or "breakglass". policy=>require policy pass, analysis=>require image analyzed, breakglass=>do nothing
+            Mode: breakglass
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

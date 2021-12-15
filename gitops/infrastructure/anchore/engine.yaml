@@ -30,12 +30,6 @@ spec:
             requests:
               cpu: 1
               memory: 1G
-        anchoreApi:
-          service:
-            type: LoadBalancer
-            port: 8228
-            annotations: {}
-            label: {}
         anchorePolicyEngine:
           resources:
             limits:
