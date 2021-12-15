@@ -17,10 +17,10 @@ spec:
     helm:
       values: |
         postgresql:
-          enabled: true
+          enabled: false
           externalEndpoint: db-postgresql-fra1-07244-do-user-6474073-0.b.db.ondigitalocean.com:25060
           postgresUser: anchore
-          postgresPassword:  agh6Dy0hSemDywBn
+          postgresPassword: agh6Dy0hSemDywBn
           postgresDatabase: anchore
         anchoreGlobal:
           defaultAdminPassword: anchore123
