@@ -14,6 +14,34 @@ spec:
     chart: anchore-engine
     repoURL: https://charts.anchore.io
     targetRevision: 1.*
+    helm:
+      values: |
+        anchoreAnalyzer:
+          malware:
+            clamav:
+              enabled: true
+              db_update_enabled: true
+          resources:
+            limits:
+              cpu: 1
+              memory: 4G
+            requests:
+              cpu: 1
+              memory: 1G
+        anchoreApi:
+          service:
+            type: LoadBalancer
+            port: 8228
+            annotations: {}
+            label: {}
+        anchorePolicyEngine:
+          resources:
+            limits:
+              cpu: 1
+              memory: 4G
+            requests:
+              cpu: 100m
+              memory: 1G
   syncPolicy:
     automated:
       prune: true

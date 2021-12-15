@@ -24,7 +24,15 @@ argocd = Chart('argocd-chart',
         chart='argo-cd',
         version='3.28.0',
         namespace=argocd_namespace.metadata["name"],
-        fetch_opts={'repo': 'https://argoproj.github.io/argo-helm'}),
+        fetch_opts={'repo': 'https://argoproj.github.io/argo-helm'},
+        values= {
+            "server": {
+                "service": {
+                    "type": "LoadBalancer"
+                }
+            }
+        }
+        ),
     opts=ResourceOptions(provider=k8s_provider))
 
 argocd_setup = Chart(
@@ -32,7 +40,7 @@ argocd_setup = Chart(
     LocalChartOpts(
         path="../argocd/setup",
         namespace=argocd_namespace.metadata["name"],
-    ),opts=ResourceOptions(provider=k8s_provider)
+    ),opts=ResourceOptions(provider=k8s_provider, depends_on=[argocd])
 )
 
 pulumi.export("kubeconfig",kube_config)
