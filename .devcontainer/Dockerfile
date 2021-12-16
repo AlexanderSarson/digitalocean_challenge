@@ -25,12 +25,18 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-     && apt-get -y install --no-install-recommends curl
+     && apt-get -y install --no-install-recommends curl git
 # Install pulumi
 RUN curl -fsSL https://get.pulumi.com | sh && echo 'export PATH="$PATH:~/.pulumi/bin"' >> ~/.bashrc 
 # Install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.22.0/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl && echo 'alias k=kubectl' >>~/.bashrc
 # Install helm
 RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+# Install kubectx
+RUN git clone https://github.com/ahmetb/kubectx /opt/kubectx && ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx && ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+
+# Install stern
+RUN curl -LO https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64 && chmod +x ./stern_linux_amd64 && mv ./stern_linux_amd64 /usr/local/bin/stern
+
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1

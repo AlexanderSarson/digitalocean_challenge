@@ -20,7 +20,7 @@ spec:
           users:
           - username: admin
             password: anchore123
-        anchoreEndpoint: "https://anchore-engine-anchore-engine-api.anchore.svc.cluster.local:8228"
+        anchoreEndpoint: "http://anchore-engine-anchore-engine-api.anchore.svc.cluster.local:8228"
         policySelectors:
           - Selector:
               ResourceType: "image"
