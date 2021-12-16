@@ -1,0 +1,6 @@
+{
+  "name": "BlacklistLatest",
+  "registry": "*",
+  "repository": "*",
+  "image": { "type": "tag", "value": "latest" }
+}

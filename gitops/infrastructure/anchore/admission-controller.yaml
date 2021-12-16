@@ -32,6 +32,16 @@ spec:
               PolicyBundleId: "2c53a13c-1765-11e8-82ef-23527761d060"
             # Mode is one of: "policy", "analysis", or "breakglass". policy=>require policy pass, analysis=>require image analyzed, breakglass=>do nothing
             Mode: breakglass
+          - Selector:
+              ResourceType: "image"
+              SelectorKeyRegex: ".*"
+              SelectorValueRegex: ".*"
+            PolicyReference:
+              Username: "admin"
+              # This is the default bundle id in anchore engine
+              PolicyBundleId: "default0"
+            # Mode is one of: "policy", "analysis", or "breakglass". policy=>require policy pass, analysis=>require image analyzed, breakglass=>do nothing
+            Mode: policy
   syncPolicy:
     automated:
       prune: true

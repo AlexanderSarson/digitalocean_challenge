@@ -18,6 +18,26 @@ spec:
       values: |
         anchoreGlobal:
           defaultAdminPassword: anchore123
+          policyBundles:
+            custom_policy_bundle1.json: |
+              {
+                "id": "default0",
+                "version": "1_0",
+                "name": "My Default bundle",
+                "comment": "My system's default bundle",
+                "whitelisted_images": [],
+                "blacklisted_images": [
+                  {
+                  "name": "BlacklistLatest",
+                  "registry": "*",
+                  "repository": "*",
+                  "image": { "type": "tag", "value": "latest" }
+                  }
+                ],
+                "mappings": [],
+                "whitelists": [],
+                "policies": []
+              }
         anchoreAnalyzer:
           malware:
             clamav:
