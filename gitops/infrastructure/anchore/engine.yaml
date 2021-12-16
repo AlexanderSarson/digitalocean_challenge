@@ -19,9 +19,9 @@ spec:
         anchoreGlobal:
           defaultAdminPassword: anchore123
           policyBundles:
-            custom_policy_bundle1.json: |
+            custom_policy_bundle1.json: |-
               {
-                "id": "default0",
+                "id": "default1",
                 "version": "1_0",
                 "name": "My Default bundle",
                 "comment": "My system's default bundle",
